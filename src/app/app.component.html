@@ -1,62 +1,69 @@
 <link rel="stylesheet" href="/src/styles.css">
- <div class="enter-city-text" *ngIf="EnterMsg">
+
+<div *ngIf="!loading; else loaderBlock">
+<div class="enter-city-text" *ngIf="EnterMsg">
   <h1>Find your city</h1>
- </div> 
+</div>
 
 <div class="search">
-  <form #form = "ngForm" (submit)="onSubmit()">
+  <form #form="ngForm" (submit)="onSubmit()">
     <input type="text" placeholder="Search" [(ngModel)]="cityName" name="city">
   </form>
+  <button *ngIf="EnterMsg" (click)="onSubmit()">Enter</button>
 </div>
-<div class="container" *ngIf="weatherData">
-  <div class="upper-data">
-    <img src="../assets/day.png" *ngIf="date.getHours() > 5 ">
-    <img src="../assets/night.jpg" *ngIf="date.getHours() > 18 || date.getHours() < 5">
 
-    <div class="weather-data">
-      <div class="location">{{weatherData.location.city | uppercase }}</div>
-      <div class="temparature">{{(weatherData.current_observation.condition.temperature - 30) / 2 |
-        number: '1.0-0'}}°С</div>
-      <div class="condition">{{ weatherData.current_observation.condition.text}}</div>
+
+  <div class="container" *ngIf="weatherData">
+    <div class="upper-data">
+      <img src="../assets/day.png" *ngIf="date.getHours() > 5 ">
+      <img src="../assets/night.jpg" *ngIf="date.getHours() > 18 || date.getHours() < 5">
+
+      <div class="weather-data">
+        <div class="location">{{weatherData.location.city | uppercase }}</div>
+        <div class="temparature">{{(weatherData.current_observation.condition.temperature - 30) / 2 |
+          number: '1.0-0'}}°С</div>
+        <div class="condition">{{ weatherData.current_observation.condition.text}}</div>
+      </div>
+    </div>
+    <div class="lower-data">
+      <div class="text">More</div>
+
+      <div class="more-info-container">
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/min.png">
+            <span>min</span>
+          </div>
+          <div class="info-block-value">{{(weatherData.forecasts[indexOf].low - 30) / 2}}°С</div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/max.png">
+            <span>max</span>
+          </div>
+          <div class="info-block-value">{{(weatherData.forecasts[indexOf].high - 30) / 2}}°С</div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/humidity.png">
+            <span>min</span>
+          </div>
+          <div class="info-block-value">{{weatherData.current_observation.atmosphere.humidity}}%</div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/wind.png">
+            <span>wind</span>
+          </div>
+          <div class="info-block-value">{{weatherData.current_observation.wind.speed}} km/h</div>
+        </div>
+
+      </div>
     </div>
   </div>
-  <div class="lower-data">
-    <div class="text">More</div>
-
-    <div class="more-info-container">
-      <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/min.png">
-          <span>min</span>
-        </div>
-        <div class="info-block-value">{{(weatherData.forecasts[indexOf].low - 30) / 2}}°С</div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/max.png">
-          <span>max</span>
-        </div>
-        <div class="info-block-value">{{(weatherData.forecasts[indexOf].high - 30) / 2}}°С</div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/humidity.png">
-          <span>min</span>
-        </div>
-        <div class="info-block-value">{{weatherData.current_observation.atmosphere.humidity}}%</div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/wind.png">
-          <span>wind</span>
-        </div>
-        <div class="info-block-value">{{weatherData.current_observation.wind.speed}} km/h</div>
-      </div>
-
-    </div>
-  </div>
 </div>
+<ng-template #loaderBlock><p>Waiting...</p></ng-template>
 <router-outlet></router-outlet>

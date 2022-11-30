@@ -9,6 +9,7 @@
     --shadow-light: rgba(255, 255, 255, 0.1);
 }
 
+
 * {
     margin: 0;
     padding: 0;
@@ -27,16 +28,19 @@ body {
     align-items: center;
 }
 
-.enter-city-text{
+.enter-city-text {
     padding: 20px;
-    color: black;
+    color: var(--white);
+    text-align: center;
 }
+
 .container {
     width: 400px;
     height: 80vh;
     background-color: var(--blue-2);
     border-radius: 20px;
     box-shadow: 10px 10px 10px var(--shadow-dark);
+    margin: 0 auto;
 }
 
 .upper-data {
@@ -128,7 +132,7 @@ body {
 }
 
 .info-block-label img {
-   width: 1.5em;
+    width: 1.5em;
 }
 
 .info-block-label span {
@@ -144,22 +148,42 @@ body {
     color: var(--white);
     font-weight: 700;
 }
-.search form{
-  text-align: center;
-  margin-bottom: 10px;
+
+.search {
+    text-align: center;
 }
+.search form {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .search input {
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  padding: 10px;
-  background-color: var(--blue-2);
-  color: black;
-  text-align: center;
-  font-size: 15px;
-  font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 10px 150px;
+    background-color: var(--blue-2);
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
 }
-.search input::placeholder{
-  color: black;
-  font-weight: normal;
+
+.search input::placeholder {
+    color: black;
+    font-weight: normal;
+}
+.search button {
+    margin-top: 5px;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background-color: var(--shadow-dark);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.search button:hover{
+    background-color: var(--shadow-light);
 }

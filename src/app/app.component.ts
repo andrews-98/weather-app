@@ -16,10 +16,10 @@ export class AppComponent implements OnInit{
   date: Date = new Date()
   // @ts-ignore
   indexOf: number = this.date.getDay() - 1
-  cityName: string = 'Khotyn'
+  cityName: string = 'London'
   errorMsg?: string
   EnterMsg: boolean = true
-
+  loading?: boolean
   constructor(private weatherService: WeatherServices) {
   }
 
@@ -27,9 +27,11 @@ export class AppComponent implements OnInit{
   }
 
   private getWeatherData(cityName: string){
+    this.loading = true
     this.weatherService.getWeatherData(cityName).subscribe((response) => {
         this.weatherData = response
         console.log(this.weatherData)
+        this.loading = false
       
     }, (error) => { this.errorMsg = error})
   }
