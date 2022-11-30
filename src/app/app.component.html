@@ -1,4 +1,8 @@
 <link rel="stylesheet" href="/src/styles.css">
+ <div class="enter-city-text" *ngIf="EnterMsg">
+  <h1>Find your city</h1>
+ </div> 
+
 <div class="search">
   <form #form = "ngForm" (submit)="onSubmit()">
     <input type="text" placeholder="Search" [(ngModel)]="cityName" name="city">

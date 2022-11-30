@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WeatherServices} from "./services/weather.services";
 import {WeatherDate} from "./models/weather.model";
 import { Observable } from 'rxjs';
+import { TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit{
   indexOf: number = this.date.getDay() - 1
   cityName: string = 'Khotyn'
   errorMsg?: string
+  EnterMsg: boolean = true
 
   constructor(private weatherService: WeatherServices) {
   }
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit{
   onSubmit() {
  this.getWeatherData(this.cityName)
     this.cityName= ''
+    this.EnterMsg = false
   }
 }
 

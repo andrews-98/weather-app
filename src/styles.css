@@ -27,6 +27,10 @@ body {
     align-items: center;
 }
 
+.enter-city-text{
+    padding: 20px;
+    color: black;
+}
 .container {
     width: 400px;
     height: 80vh;
