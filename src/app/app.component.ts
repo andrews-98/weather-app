@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WeatherServices} from "./services/weather.services";
 import {WeatherDate} from "./models/weather.model";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit{
   // @ts-ignore
   indexOf: number = this.date.getDay() - 1
   cityName: string = 'Khotyn'
+  errorMsg?: string
 
   constructor(private weatherService: WeatherServices) {
   }
@@ -23,12 +25,11 @@ export class AppComponent implements OnInit{
   }
 
   private getWeatherData(cityName: string){
-    this.weatherService.getWeatherData(cityName).subscribe({
-      next: (response) => {
+    this.weatherService.getWeatherData(cityName).subscribe((response) => {
         this.weatherData = response
         console.log(this.weatherData)
-      }
-    })
+      
+    }, (error) => { this.errorMsg = error})
   }
 
   onSubmit() {
